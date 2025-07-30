@@ -9,7 +9,10 @@ from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
 from database.db import db
-from models import User
+from models.User import  User
+
+
+
 # from models import Person
 
 app = Flask(__name__)
@@ -20,11 +23,13 @@ if db_url is not None:
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace(
         "postgres://", "postgresql://")
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
+    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///tmp/test.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-MIGRATE = Migrate(app, db)
+
 db.init_app(app)
+Migrate = Migrate(app, db)
+
 CORS(app)
 setup_admin(app)
 

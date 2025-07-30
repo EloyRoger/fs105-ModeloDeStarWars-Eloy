@@ -1,0 +1,4 @@
+flask-migrate
+flask-swagger
+flask-admin
+python-dotenv
